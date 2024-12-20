@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Exercise {
+public class ExerciseType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,10 @@ public class Exercise {
         CHEST, BACK, CORE, LEGS, SHOULDERS, PECTORALIS, BICEPS, QUADRICEPS, TRICEPS, DELTOID, GLUTEUS,
     }
 
-    public Exercise() {
+    public ExerciseType() {
     }
 
-    public Exercise(String name, String primaryMuscleGroup, List<String> secondaryMuscleGroups, String videoUrl) {
+    public ExerciseType(String name, String primaryMuscleGroup, List<String> secondaryMuscleGroups, String videoUrl) {
         this.name = name;
         this.primaryMuscleGroup = setMuscleGroup(primaryMuscleGroup);
 
@@ -113,10 +113,10 @@ public class Exercise {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Exercise exercise = (Exercise) o;
+        ExerciseType exerciseType = (ExerciseType) o;
 
-        if (!Objects.equals(id, exercise.id)) return false;
-        return Objects.equals(name, exercise.name);
+        if (!Objects.equals(id, exerciseType.id)) return false;
+        return Objects.equals(name, exerciseType.name);
     }
 
     @Override
