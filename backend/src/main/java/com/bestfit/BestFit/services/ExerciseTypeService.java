@@ -19,21 +19,21 @@ public class ExerciseTypeService {
     }
 
     public ExerciseType findByName(String name) {
-        return exerciseTypeRepository.findByName(name);
+        if (!name.isEmpty()) return exerciseTypeRepository.findByName(name);
+        return null;
     }
 
     public List<ExerciseType> findByPrimaryMuscleGroup(ExerciseType.MuscleGroup primaryMuscleGroup) {
         return exerciseTypeRepository.findByPrimaryMuscleGroup(primaryMuscleGroup);
     }
 
-
-    List<ExerciseType> findBySecondaryMuscleGroup(ExerciseType.MuscleGroup primaryMuscleGroup, ExerciseType.MuscleGroup secondaryMuscleGroup) {
+    public List<ExerciseType> findBySecondaryMuscleGroup(ExerciseType.MuscleGroup primaryMuscleGroup, ExerciseType.MuscleGroup secondaryMuscleGroup) {
         List<ExerciseType> allForPrimaryMuscleGroup = exerciseTypeRepository.findByPrimaryMuscleGroup(primaryMuscleGroup);
 
         List<ExerciseType> allWithSecondaryMuscleGroup = new ArrayList<>();
 
         for (ExerciseType exerciseType : allForPrimaryMuscleGroup) {
-            if (exerciseType.getSecondaryMuscleGroups().contains(secondaryMuscleGroup)) {
+            if (exerciseType != null && exerciseType.getSecondaryMuscleGroups().contains(secondaryMuscleGroup)) {
                 allWithSecondaryMuscleGroup.add(exerciseType);
             }
         }
@@ -42,14 +42,16 @@ public class ExerciseTypeService {
     }
 
     public void updateVideo(String name, String url) {
-        ExerciseType exerciseType = exerciseTypeRepository.findByName(name);
-        exerciseType.setVideoUrl(url);
-        exerciseTypeRepository.save(exerciseType);
+        ExerciseType exerciseType = findByName(name);
+        if (exerciseType != null) {
+            exerciseType.setVideoUrl(url);
+            exerciseTypeRepository.save(exerciseType);
+        }
     }
 
     public void deleteExerciseByName(String name) {
-        ExerciseType exerciseType = exerciseTypeRepository.findByName(name);
-        exerciseTypeRepository.delete(exerciseType);
+        ExerciseType exerciseType = findByName(name);
+        if (exerciseType != null) exerciseTypeRepository.delete(exerciseType);
     }
 
 
