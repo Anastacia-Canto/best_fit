@@ -5,13 +5,15 @@ import jakarta.persistence.*;
 import java.time.LocalTime;
 
 @Entity
+@Table(name="exercise")
 public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique=true)
+    @OneToOne
+    @JoinColumn(name="exercise_type", referencedColumnName = "id")
     private ExerciseType type;
 
     private int repetition;

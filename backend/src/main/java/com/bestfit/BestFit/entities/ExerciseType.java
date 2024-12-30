@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="exercise_type")
 public class ExerciseType {
 
     @Id
@@ -20,7 +21,7 @@ public class ExerciseType {
     private MuscleGroup primaryMuscleGroup;
 
     @ElementCollection
-    @CollectionTable(name="secondary_muscle_group", joinColumns = @JoinColumn(name="exercise_id"))
+    @CollectionTable(name="secondary_muscle_group", joinColumns = @JoinColumn(name="exercise_type_id"))
     @Column(name="muscle_group")
     @Enumerated(EnumType.STRING)
     private List<MuscleGroup> secondaryMuscleGroups;
