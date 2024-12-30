@@ -14,9 +14,9 @@ public class GlobalExceptionHandler {
         return new RestErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 
-    @ExceptionHandler(NoExerciseTypeFoundException.class)
+    @ExceptionHandler(NoExerciseFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    RestErrorResponse handleNoExerciseTypeFoundException(NoExerciseTypeFoundException e) {
+    RestErrorResponse handleNoExerciseFoundException(NoExerciseFoundException e) {
         return new RestErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 }
